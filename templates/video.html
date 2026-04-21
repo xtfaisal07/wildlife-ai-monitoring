@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Upload</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .drop-zone {
+            border: 2px dashed #06b6d4;
+            padding: 40px;
+            border-radius: 15px;
+            cursor: pointer;
+            margin: 20px;
+        }
+
+        .drop-zone:hover {
+            background: rgba(6,182,212,0.1);
+        }
+
+        .progress {
+            width: 100%;
+            background: #334155;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 10px;
+            background: #06b6d4;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div style="max-width: 900px; margin:auto; text-align:center;">
+
+    <h1>📹 Video Upload & Detection</h1>
+
+    <div class="card">
+
+        <form id="uploadForm" action="/process_video" method="post" enctype="multipart/form-data">
+
+            <!-- Drag & Drop Area -->
+            <div class="drop-zone" id="dropZone">
+                <p>📁 Drag & Drop Video Here</p>
+                <p>or click to select</p>
+                <input type="file" name="video" id="fileInput" hidden required>
+            </div>
+
+            <p id="fileName" style="margin-top:10px;"></p>
+
+            <div class="progress" style="margin-top:20px;">
+            <div class="progress-bar"></div>
+        </div>
+
+            <br>
+            <button type="submit">🚀 Upload & Detect</button>
+
+        </form>
+    </div>
+
+    <br>
+    <a href="/"><button>⬅ Back to Home</button></a>
+
+</div>
+
+<script>
+const dropZone = document.getElementById("dropZone");
+const fileInput = document.getElementById("fileInput");
+const fileName = document.getElementById("fileName");
+const progressBar = document.getElementById("progressBar");
+const progressBox = document.getElementById("progressBox");
+
+// Click to open file
+dropZone.addEventListener("click", () => fileInput.click());
+
+// Drag & Drop
+dropZone.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    dropZone.style.background = "#1e293b";
+});
+
+dropZone.addEventListener("dragleave", () => {
+    dropZone.style.background = "transparent";
+});
+
+dropZone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    fileInput.files = e.dataTransfer.files;
+    fileName.innerText = fileInput.files[0].name;
+});
+
+// File selected
+fileInput.addEventListener("change", () => {
+    fileName.innerText = fileInput.files[0].name;
+});
+
+// Fake progress animation
+document.getElementById("uploadForm").addEventListener("submit", () => {
+    progressBox.style.display = "block";
+
+    let width = 0;
+    let interval = setInterval(() => {
+        if (width >= 100) clearInterval(interval);
+        width += 10;
+        progressBar.style.width = width + "%";
+    }, 200);
+
+    
+});
+
+
+</script>
+
+</body>
+</html>

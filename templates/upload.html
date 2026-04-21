@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Image</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body style="text-align:center;">
+    <h2>📷 Upload Image for Detection</h2>
+
+    <div class="card">
+    <form action="/detect" method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" required>
+    <br><br>
+    <button type="submit">Detect</button>
+    
+    </form>
+    </div>
+
+<a href="/"><button>⬅ Back</button></a>
+</body>
+
+    <br>
+    <a href="/">⬅ Back</a>
+</body>
+</html>

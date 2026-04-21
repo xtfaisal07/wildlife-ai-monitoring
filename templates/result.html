@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body style="text-align:center;">
+
+<h2>🧠 Detection Result</h2>
+
+{% if image %}
+<img src="{{ image }}" width="500">
+{% endif %}
+
+<h3>Detected: {{ detected }}</h3>
+
+{% if alert %}
+<div style="background:red; padding:15px; border-radius:10px;">
+<h2>🚨 POACHER ALERT: Human Detected!</h2>
+</div>
+{% endif %}
+
+<br>
+
+{% if image %}
+<a href="/download_image">
+    <button>⬇ Download Image</button>
+</a>
+{% endif %}
+
+{% if video %}
+<h2>Processed Video</h2>
+<video width="500" controls>
+    <source src="{{ video }}" type="video/mp4">
+</video>
+
+<br><br>
+
+<a href="/download_video">
+    <button>⬇ Download Video</button>
+</a>
+{% endif %}
+
+<br><br>
+<a href="/">⬅ Home</a>
+
+</body>
+</html>
