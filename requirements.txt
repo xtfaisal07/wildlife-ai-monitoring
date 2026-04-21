@@ -3,4 +3,3 @@ gunicorn
 ultralytics
 opencv-python-headless
 numpy
-sqlite3
